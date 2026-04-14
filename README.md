@@ -44,48 +44,17 @@ BT4222-Group04/
 4. Run all cells in order: **Runtime → Run all**.
 5. Authorise Google Drive access when prompted.
 
-### Dependencies
-
-All packages below are pre-installed in Google Colab — no `pip install` steps are required.
-
-| Package | Version (Colab default) | Purpose |
-|---------|------------------------|---------|
-| `numpy` | ≥ 1.24 | Numerical computing |
-| `pandas` | ≥ 1.5 | Data manipulation |
-| `matplotlib` | ≥ 3.6 | Visualisation |
-| `scikit-learn` | ≥ 1.2 | Preprocessing, TF-IDF, Nearest Neighbours |
-| `scipy` | ≥ 1.10 | Sparse matrix operations |
-| `torch` (PyTorch) | ≥ 2.0 | NCF model and autoencoder training |
-| `tqdm` | ≥ 4.0 | Progress bars |
-
-> If running **outside Colab**, install the above via `pip` and replace the Google Drive mount cell (Cell 1) with a local file path.
-
----
-
-## Cached Artefacts
-
-To avoid recomputing expensive operations on repeated runs, the pipeline saves and loads the following artefacts to/from `data_path`:
-
-| File | Description | 
-|------|-------------|
-| `stage2_expanding_window_model.pt` | Trained NCF model weights |
-| `item_autoencoder.pt` | Autoencoder weights for item embeddings |
-| `item_matrix.npy` | Raw dense item feature matrix |
-| `latent_matrix.npy` | 64-dim L2-normalised latent embeddings |
-| `item_matrix_article_ids.csv` | Article ID index for the item matrix |
-| `neighbours_ae.pkl` | Pre-computed top-50 cosine NN dict |
-
-**These files are not included in this repository.** They will be created automatically the first time the notebook runs with `NN_TRAIN = True`. On subsequent runs, set `NN_TRAIN = False` (the default) to load from cache instead of rebuilding.
-
-To force a full rebuild from scratch, set `NN_TRAIN = True` in Cell 55.
-
----
-
 ## Datasets
 
-The raw datasets must be downloaded from the Kaggle competition page:
-
+**Automatic handling** — no manual download needed. 
+1. **Primary**: Notebook auto-downloads from Kaggle using `kagglehub`
+   
+**Manual download only if automatic methods fail**:
+2. **Backup**: Download from Kaggle
+**Kaggle requirements**: Register/login + **join competition** (data is access-restricted)
 **[https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data)**
+3. **Backup**: Shared Google Drive folder with all 3 CSVs:
+   https://drive.google.com/drive/folders/1p-wT4TWw_KuTbZ_1KOY-LetdcN2J2CvB?usp=drive_link
 
 | File | Size | Description |
 |------|------|-------------|
@@ -100,6 +69,10 @@ After downloading, place all three files in your Google Drive at:
 If you use a different path, update the `data_path` variable in **Cell 2** of the notebook.
 
 ---
+
+## Notes
+
+- **T4 GPU required** for reasonable training time (around 6 hours end-to-end)
 
 ## Notes
 
