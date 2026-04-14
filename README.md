@@ -8,7 +8,7 @@ This repository contains the source code for the BT4222 project, which builds a 
 
 ```
 BT4222-Group04/
-├── Group_04_Pipeline.ipynb   # End-to-end recommendation pipeline (data cleaning →
+├── BT4222-G4-pipeline.ipynb   # End-to-end recommendation pipeline (data cleaning →
 │                             # feature engineering → NCF training → inference → evaluation)
 └── README.md                 # This file
 ```
