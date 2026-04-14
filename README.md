@@ -8,9 +8,9 @@ This repository contains the source code for the BT4222 project, which builds a 
 
 ```
 BT4222-Group04/
-├── BT4222-G4-pipeline.ipynb   # End-to-end recommendation pipeline (data cleaning →
-│                             # feature engineering → NCF training → inference → evaluation)
-└── README.md                 # This file
+├── BT4222-G4-pipeline.ipynb                 # End-to-end recommendation pipeline
+├── BT4222-G4-pipeline (with training).ipynb # Supplementary notebook with training outputs
+└── README.md                                # This file
 ```
 
 > The raw CSV datasets are **not included** in this repository due to file size constraints. See [Datasets](#datasets) below for download instructions.
@@ -73,3 +73,5 @@ If you use a different path, update the `data_path` variable in **Cell 2** of th
 ## Notes
 
 - **T4 GPU required** for reasonable training time (around 6 hours end-to-end)
+- `BT4222-G4-pipeline (with training).ipynb` was added as a supplementary notebook to preserve training and evaluation outputs for verification.
+- The supplementary notebook does not change the pipeline design or reported results; it only preserves outputs generated during training and evaluation. The original submission notebook remains the primary source code deliverable, while the later notebook is provided as a supplementary verification artifact to make the training/evaluation results inspectable. 
