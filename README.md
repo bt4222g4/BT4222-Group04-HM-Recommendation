@@ -46,15 +46,15 @@ BT4222-Group04/
 
 ## Datasets
 
-**Automatic handling** — no manual download needed. 
+**Automatic handling** — no manual download needed:
+
 1. **Primary**: Notebook auto-downloads from Kaggle using `kagglehub`
-   
-**Manual download only if automatic methods fail**:
-2. **Backup**: Download from Kaggle
-**Kaggle requirements**: Register/login + **join competition** (data is access-restricted)
-**[https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data)**
-3. **Backup**: Shared Google Drive folder with all 3 CSVs:
-   https://drive.google.com/drive/folders/1p-wT4TWw_KuTbZ_1KOY-LetdcN2J2CvB?usp=drive_link
+2. **Backup**: Shared Google Drive folder:
+   [https://drive.google.com/drive/folders/1p-wT4TWw_KuTbZ_1KOY-LetdcN2J2CvB?usp=drive_link](https://drive.google.com/drive/folders/1p-wT4TWw_KuTbZ_1KOY-LetdcN2J2CvB?usp=drive_link)
+
+**Manual download only if automatic methods fail** (Kaggle):
+[https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data)
+(Register/login + **join competition** required)
 
 | File | Size | Description |
 |------|------|-------------|
@@ -73,7 +73,3 @@ If you use a different path, update the `data_path` variable in **Cell 2** of th
 ## Notes
 
 - **T4 GPU required** for reasonable training time (around 6 hours end-to-end)
-
-## Notes
-
-- Reported model performance (MAP@10) can be reproduced by running the notebook end-to-end with `NN_TRAIN = True`. 
