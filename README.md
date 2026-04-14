@@ -1,6 +1,6 @@
 # BT4222 Group 04 — H&M Personalised Fashion Recommendations
 
-This repository contains the source code and datasets for the BT4222 project, which builds a fashion recommendation pipeline on the [H&M Personalised Fashion Recommendations](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations) dataset from Kaggle.
+This repository contains the source code for the BT4222 project, which builds a fashion recommendation pipeline on the [H&M Personalised Fashion Recommendations](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data) dataset from Kaggle.
 
 ---
 
@@ -8,15 +8,12 @@ This repository contains the source code and datasets for the BT4222 project, wh
 
 ```
 BT4222-Group04/
-├── Group_04_Pipeline.ipynb       # Main pipeline notebook (see below)
-├── README.md                     # This file
-└── data/
-    ├── articles.csv              # Article metadata (from Kaggle)
-    ├── customers.csv             # Customer metadata (from Kaggle)
-    └── transactions_train.csv    # Transaction history (from Kaggle)
+├── Group_04_Pipeline.ipynb   # End-to-end recommendation pipeline (data cleaning →
+│                             # feature engineering → NCF training → inference → evaluation)
+└── README.md                 # This file
 ```
 
-> **Note:** The `data/` folder contains only the three raw CSV files. Cached artefacts (`.npy`, `.pkl`, `.pt`) are generated automatically at runtime and stored to the same `data_path`. See [Cached Artefacts](#cached-artefacts) below.
+> The raw CSV datasets are **not included** in this repository due to file size constraints. See [Datasets](#datasets) below for download instructions.
 
 ---
 
@@ -43,11 +40,7 @@ BT4222-Group04/
 
 1. Upload `Group_04_Pipeline.ipynb` to Google Colab, or open it directly from Google Drive.
 2. Set runtime to GPU: **Runtime → Change runtime type → T4 GPU**.
-3. Upload the three CSV files from `data/` to your Google Drive at the following path:
-   ```
-   /content/drive/MyDrive/BT4222 Group 04/data/
-   ```
-   If you use a different path, update the `data_path` variable in **Cell 2** accordingly.
+3. Download the three CSV files from Kaggle (see [Datasets](#datasets)) and place them in your Drive at the path above.
 4. Run all cells in order: **Runtime → Run all**.
 5. Authorise Google Drive access when prompted.
 
@@ -73,13 +66,13 @@ All packages below are pre-installed in Google Colab — no `pip install` steps 
 
 To avoid recomputing expensive operations on repeated runs, the pipeline saves and loads the following artefacts to/from `data_path`:
 
-| File | Description |
+| File | Description | 
 |------|-------------|
-| `stage2_expanding_window_model.pt` | Trained NCF model weights | 
-| `item_autoencoder.pt` | Autoencoder weights for item embeddings | 
-| `item_matrix.npy` | Raw dense item feature matrix | 
-| `latent_matrix.npy` | 64-dim L2-normalised latent embeddings | 
-| `item_matrix_article_ids.csv` | Article ID index for the item matrix | 
+| `stage2_expanding_window_model.pt` | Trained NCF model weights |
+| `item_autoencoder.pt` | Autoencoder weights for item embeddings |
+| `item_matrix.npy` | Raw dense item feature matrix |
+| `latent_matrix.npy` | 64-dim L2-normalised latent embeddings |
+| `item_matrix_article_ids.csv` | Article ID index for the item matrix |
 | `neighbours_ae.pkl` | Pre-computed top-50 cosine NN dict |
 
 **These files are not included in this repository.** They will be created automatically the first time the notebook runs with `NN_TRAIN = True`. On subsequent runs, set `NN_TRAIN = False` (the default) to load from cache instead of rebuilding.
@@ -90,16 +83,21 @@ To force a full rebuild from scratch, set `NN_TRAIN = True` in Cell 55.
 
 ## Datasets
 
-The raw datasets are sourced from the Kaggle competition:  
-**[H&M Personalized Fashion Recommendations](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data)**
+The raw datasets must be downloaded from the Kaggle competition page:
 
-| File | Description |
-|------|-------------|
-| `articles.csv` | Metadata for ~105K articles (product type, colour, department, etc.) |
-| `customers.csv` | Metadata for ~1.4M customers (age, club membership, etc.) |
-| `transactions_train.csv` | ~31M purchase transactions from Sep 2018 to Sep 2020 |
+**[https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data)**
 
-> The datasets are available in this repository and via the Kaggle link above.
+| File | Size | Description |
+|------|------|-------------|
+| `articles.csv` | ~36 MB | Metadata for ~105K articles — product type, colour group, department, garment group, and text descriptions |
+| `customers.csv` | ~200 MB | Metadata for ~1.4M customers — age, club membership status, and fashion news subscription preference |
+| `transactions_train.csv` | ~3.5 GB | ~31M purchase transactions from Sep 2018 to Sep 2020 — customer ID, article ID, price, and sales channel |
+
+After downloading, place all three files in your Google Drive at:
+```
+/content/drive/MyDrive/BT4222 Group 04/data/
+```
+If you use a different path, update the `data_path` variable in **Cell 2** of the notebook.
 
 ---
 
